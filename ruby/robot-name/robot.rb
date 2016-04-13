@@ -2,10 +2,14 @@ class Robot
   attr_reader :name
 
   def initialize
-    @name = [*'A'..'Z'].sample(2).join + [*'0'..'9'].sample(3).join
+    @name = generate_name
   end
 
   def reset
-    initialize
+    @name = generate_name
+  end
+
+  def generate_name
+    Array.new(2) { [*'A'..'Z'].sample }.join + Array.new(3) { rand(0..9) }.join
   end
 end
