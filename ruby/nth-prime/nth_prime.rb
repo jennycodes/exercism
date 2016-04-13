@@ -1,19 +1,17 @@
 class Prime
   def self.nth(n)
-    raise ArgumentError.new("Not a prime number!") if n <= 0
-    @primes = [2]
+    raise ArgumentError, 'Not a prime number!' if n <= 0
+    primes = [2]
     current_num = 3
-    while @primes.count < n
-      @primes << current_num if self.prime?(current_num)
+    while primes.size < n
+      primes << current_num if prime?(current_num)
       current_num += 2
     end
-    @primes.max
+    primes.max
   end
 
   def self.prime?(num)
-    for i in (2..(num - 1))
-      return false if num % i == 0
-    end
+    (2..Math.sqrt(num)).each { |i| return false if num % i == 0 }
     true
   end
 end
