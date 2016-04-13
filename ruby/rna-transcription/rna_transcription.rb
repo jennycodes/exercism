@@ -8,10 +8,7 @@ class Complement
       'A' => 'U'
     }
 
-    if strand =~ /[^GCTA]/
-      raise ArgumentError.new("Invalid strand!")
-    else
-      strand.gsub(/[GCTA]/, dna_rna_complements)
-    end
+    raise ArgumentError, 'Invalid strand!' if strand =~ /[^GCTA]/
+    strand.gsub(/[GCTA]/, dna_rna_complements)
   end
 end
