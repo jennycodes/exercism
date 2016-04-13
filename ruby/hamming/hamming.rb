@@ -1,15 +1,12 @@
 class Hamming
-  def self.compute(strand1, strand2)
-    if strand1.length != strand2.length
-      raise ArgumentError.new("The strands are not the same length!")
-    else
-      hamming_distance = 0
-      strand1.each_char.with_index do |strand1_char, i|
-        hamming_distance += 1 if strand2[i] != strand1_char
-        i += 1
-      end
-      return hamming_distance
-    end
-  end
   VERSION = 1
+  def self.compute(strand1, strand2)
+    msg = 'The strands are not the same length!'
+    raise ArgumentError, msg if strand1.length != strand2.length
+
+    strand1_chars = strand1.chars
+    strand2_chars = strand2.chars
+
+    [strand1_chars, strand2_chars].transpose.count { |c1, c2| c1 != c2 }
+  end
 end
